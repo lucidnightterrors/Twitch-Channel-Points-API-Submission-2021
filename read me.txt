@@ -1,0 +1,58 @@
+Lore Update / Turned Based RPG Via Chat
+
+As my submission I have created a turn based RPG game that can be played through the Twitch channel points API as rewards, entirely in LioranBoard. The reward is entierly created by lioranbord as per twitches specifications. I have included a lore.lbe file for ease of installation simply by choosing the file after clicking on the “install extension” option on the LioranBord Receiver. You will also need to install the Channel Ppoints Exctention.lbe for this two work which has also been included. YOU WILL NEED VERSION 1.40v OR HIGHER FOR THIS TO WORK and renew your twitch token.
+
+Hers a link to download lioran bord…
+http://lioran.servehttp.com/share/lioranboard/download.html
+
+The necessary installation websocket…
+https://obsproject.com/forum/resources/obs-websocket-remote-control-obs-studio-from-websockets.466/
+
+The whole of the game is on an 18 button deck, each button has a customized button ID laid out on a 5 x 3 grid starting with the first top level of 3 buttons cr11, cr12, cr13. The next layer of buttons should be identified as cr21, cr22, cr33. The next should be cr31, cr32, cr33 and so on to the 6th level of buttons. The button position for cr12 is black and has no button on the deck. It would be wise to check the ID of each button and making sure they have the correct custom ID created as a grid shown at the bottom of the document.
+
+All necessary rewards, Lore Code, Start, Laser, and Slap are created in button cr22 (Twitch CP API). The Twitch CP API button should create all necessary rewards upon installations of the Channel Points extension and the Lore Code extension installation. This only has to be done once. If any of the rewards created by this deck are deleted in the Manage Reward section of twitch. You must completely delete the reward ID of each deleted reward in the Channel points.ini which can be found in LioranBoard Receiver(PC) folder inside of the primary LioranBord folder. Just open up the .ini file and delete the id’s text and save and restart the LioranBord Receiver.
+
+Next we have button cr32 (Trigger) which triggers the game, pulls the redeemer’s user name, Disables the Lore Code Reward and enables the Start reward and updates channel points reward status, and triggers button cr42 (Init).
+
+The Initiation button resets player and enemy HP and resets UI and fight background image along with sending a message to redeemer to redeem Start to proceed. 
+
+Once a player redeems the Start Reward, button cr52 (Start) is triggered where redeemer’s username is pulled and compared and channel points are canceled or accepted automatically depending if you are the current redeemer or not. If you are you points are accepted in the rewards queue and if not they are refunded or canceled with out the need of a streamer or moderator. It all happens automatically. This button also deactivates and removes the Start reward and enables the Slap and Laser rewards and makes them visible as a Twitch reward along with sending the redeemer a message with instructions advising him to choose one reward or the other to initiate combat with the enemy.
+
+Depending on the reward the redeemer chooses Laser or Slap, button cr31 (Player_laser) or cr41 (Player_Slap) will be triggered. These two buttons check and compare the current redeemer to any other persons attempt to redeem the reward, disables the rewards Laser and Slap and toggles the viability of UI buttons and sounds in OBS Studio, and triggers their respective attack button cr21 (Laser) or cr51 (Slap) for current redeemer.  
+
+Buttons cr21 (Laser) or cr51 (Slap) turn on the visibility of attack and health animations and sound, toggles back ground filter movements in OBS Studio, create a 15% chance of missing on “laser” which decreases enemy HP by 10 points if not, a 5% miss chance for “slap” which deals only 5 points of damage, but has a 10% chance to do critical damage for 15 points to enemy. These buttons also check Enemy HP (health points) and either triggers button cr33 (Enemy) or cr43 (Win/Lose).
+
+The Enemy button creates a 2 out of 3 chance of triggering its stronger cr23 (Claw) which has a 10% chance to miss, deals 10 damage or its weaker attack cr63 (Foot) which has a 5% chance to miss, deals 5 damage to player, but can do critical damage for 20 points to player along with turning the visibility of enemy attack, UI scenes and sounds on and off with in OBS Studio. These buttons also check Player HP (health points) and either triggers button cr53 (Player_Health) or cr43 (Win/Lose).
+
+The Player_Health button reports redeemer’s current health points in a Twitch message via chat and enables rewards Laser and Slap in Twitch channel points rewards for players next turn.
+
+When the Win/Lose button is activated by the loss of HP on player or enemy reaching 0, it compares player’s hp to that of enemy’s hp. If player/redeemer has lost a Twitch message is sent to Twitch chat of the loss and a “You lost” animation’s visibility is turned on in OBS Studio along with sound files and the cr62 (END) button is triggered.  If player/redeemer has won a Twitch message is sent to Twitch chat of the win and a “You Win!” animation’s visibility is turned on in OBS Studio along with sound files and the cr61 (CODE) button is triggered for 4000 ms (milliseconds) before the cr62 (END) button is triggered.
+
+The CODE Button is an optional button with images or a secret code that is given as a reward for winning the game. The visibility of the images are turned on and off depending on a random number generated in OBS Studio.
+
+The END button Ends the game by toggling its visibility in OBS Studio and disabling the rewards Laser and Slap and enabling the Lore Code reward once again effectively resetting the whole cycle.
+
+I made this because my stream has lore to it, and this is an innovative and fun way to give secret codes to my viewers that they can try to solve and discover new lore to my twitch channel. I have a total of 8 loop animations that are only seconds long, 7 images for the UI, and 10 optional sound files 2 of which are loop non copyright game music loops.
+
+In OBS Studio I have 9 scenes. ENCOUNTER_UI, MASTER_ENCOUNTER, START_SCREEN, PLAYER_FIGHT, ENEMY_FIGHT, UI, HEALTH, YOU_WIN/LOSE, MASTER_FIGHT_SOUND.
+
+ENCOUNTER_UI has 6 nested scenes in this order, Win/Lose, Start_Screen, Health, Enemy_Fight, Player_Fight, Master_Encounter (AKA background loop)
+
+UI scene is nested in  MASTER_ENCOUNTER.
+
+I have made commissioned all animations and art and using sound and music files purchased that are royalty free from zapsplat. If Sound is an issue it can be removed (Just watch the submission video muted).
+
+I have 2 different attack animations each for player and enemy, One Backgound loop with both charters on it, a start screen animation, a win animation, a lose animation, and -5, -10, -15, -20, a miss, the word slap, the word laser as and my codes as images.
+
+It is very important that the button IDs are correct for this lioranbord deck to work here is a grid of the button IDs as they go on the deck. To change a button ID click the deck in the receiver, right click on the desired button, you will see “Button ID” at the bottom, left lick on the button ID if it is incorrect and change all button as shown in the grid below if deck is not working.
+
+Cr11, blank, Cr13 
+Cr21, Cr22, Cr23 
+Cr31, Cr32, Cr33 
+Cr41, Cr42, Cr43 
+Cr51, Cr52, Cr53 
+Cr61, Cr62, Cr63
+
+I really enjoyed making this and I thank you for your consideration. 
+
+LucidNightTerros
